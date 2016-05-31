@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Magic Suggest</title>
+    <link rel="stylesheet" href="./magic/magicsuggest.css">
+</head>
+<body>
+    <div>
+        <div id="magicsuggest" style="height: 120px;"></div>
+    </div>
+
+    <script src="//cdn.bootcss.com/jquery/2.2.3/jquery.min.js"></script>
+    <script src="./magic/magicsuggest-min.js"></script>
+    <script>
+        // http://nicolasbize.com/magicsuggest/doc.html
+        var mg = $("#magicsuggest").magicSuggest({
+            allowFreeEntries: false,
+            expandOnFocus: false,
+            minChars: 1,
+            maxDropHeight: 145,        // 下拉框显示最大高度
+            data: function(q){
+                console.log(q);
+                return [
+                    {id: '1', name: 'Paris'},
+                    {id: '2', name: 'New York'},
+                    {id: '3', name: 'Gotham'}
+                ];
+            },
+            placeholder: 'type here~',
+            noSuggestionText: 'No result matching the term {{query}}',    // 找不到内容的提醒
+        });
+        $(mg).on('selectionchange', function(e, cb, value){
+            console.log(value)
+        });
+
+        // mg.setValue(['1', '2']);
+        // mg.setData([]) 重置选项
+        // mg.getValue();
+        // mg.getSelection();
+    </script>
+</body>
+</html>

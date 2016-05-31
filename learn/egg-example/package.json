@@ -1,0 +1,15 @@
+{
+  "name": "egg-test-example",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "@ali/egg": "^2.2.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "da宗熊",
+  "license": "ISC"
+}

@@ -1,0 +1,11 @@
+message UsItem
+{
+  required string res_code = 1;
+  required string sum_info = 2;
+  required int32 recycle = 3;
+  required int32 save_flag = 4;
+  required int32 zip_flag = 5;
+  required int32 enc_flag = 6;
+  optional string msg_type = 7;
+  optional bytes res_data = 8;
+}

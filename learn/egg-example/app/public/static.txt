@@ -1,0 +1,4 @@
+在 config/plugin.js 中，
+设置 exports.static = true;
+
+这个文件夹下的资源，可通过 /public/static.txt 的形式访问

@@ -1,0 +1,31 @@
+// 建立表的索引，需要找 '李景超'
+// napi资料: http://doc.ucweb.local/pages/viewpage.action?pageId=52503141&src=spaceshortcut 找后端要个测试APP，一般都有这种环境，可以随便玩的
+// 流程： http://doc.ucweb.local/pages/viewpage.action?pageId=166233373&src=contextnavpagetreemode
+// 搜索的napi如下[此接口已废弃，参考一下参数设置就可以]: http://doc.ucweb.local/pages/viewpage.action?pageId=39622796&src=contextnavpagetreemode
+
+// 开发环境的索引
+
+{
+  "index_name": "roles-index",
+  "since_time": "2016-05-03 12:00:00",
+  "meta": {
+    "name": {
+      "source_field": "name",
+      "analyzer": "napi_common",
+      "type": "string",
+      "sort": false,
+      "format": ""
+    },
+    "countries": {
+      "source_field": "countries",
+      "analyzer": "napi_common",
+      "type": "数组",
+      "sort": false,
+      "format": ""
+    }
+  }
+}
+
+APPID:b4c926d5150a492ba7f610f8d5b34d97
+class: roles
+countries字段，是类似这种格式的: ['CN', 'IN', 'DN']，不知道对应的type是什么？

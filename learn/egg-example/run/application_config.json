@@ -1,0 +1,328 @@
+{
+  "config": {
+    "env": "local",
+    "name": "egg-test-example",
+    "keys": "282ac317c9fe07061fe4d0aa9c5fc94e.egg-test-example",
+    "protocolHeaders": "X-Forwarded-Proto, X-Client-Scheme, X-Forwarded-By-Spanner",
+    "pkg": {
+      "name": "egg-test-example",
+      "version": "1.0.0",
+      "description": "",
+      "main": "index.js",
+      "dependencies": {},
+      "devDependencies": {
+        "@ali/egg": "^2.2.0"
+      },
+      "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+      },
+      "author": "da宗熊",
+      "license": "ISC"
+    },
+    "baseDir": "E:\\github\\uc\\learn\\egg-example",
+    "rundir": "E:\\github\\uc\\learn\\egg-example\\run",
+    "core": {
+      "name": "Egg"
+    },
+    "notfound": {
+      "pageUrl": "",
+      "enableRedirect": false
+    },
+    "siteFile": {
+      "/favicon.ico": "https://www.alibaba.com/favicon.ico"
+    },
+    "bodyParser": {
+      "encoding": "utf8",
+      "formLimit": "100kb",
+      "jsonLimit": "100kb",
+      "strict": true,
+      "queryString": {
+        "arrayLimit": 100,
+        "depth": 5,
+        "parameterLimit": 1000
+      }
+    },
+    "logger": {
+      "dir": "E:\\github\\uc\\learn\\egg-example\\logs\\egg-test-example",
+      "rotateLogDirs": [
+        "E:\\github\\uc\\learn\\egg-example\\logs\\egg-test-example"
+      ],
+      "encoding": "utf8",
+      "env": "local",
+      "level": "DEBUG",
+      "consoleLevel": "WARN",
+      "outputJSON": false,
+      "buffer": false,
+      "appLogName": "egg-test-example-web.log",
+      "coreLogName": "egg-web.log",
+      "agentLogName": "egg-agent.log",
+      "errorLogName": "common-error.log"
+    },
+    "urllib": {
+      "keepAlive": true,
+      "keepAliveTimeout": 30000,
+      "timeout": 30000,
+      "maxSockets": null,
+      "maxFreeSockets": 256
+    },
+    "coreMiddleware": [
+      "meta",
+      "siteFile",
+      "notfound",
+      "bodyParser",
+      "overrideMethod"
+    ],
+    "jsonp": {
+      "callback": "_callback",
+      "limit": 50
+    },
+    "onerror": {
+      "errorPageUrl": ""
+    },
+    "userservice": {
+      "service": {}
+    },
+    "userrole": {},
+    "session": {
+      "store": "cookie",
+      "maxAge": 86400000,
+      "key": "EGG_SESS",
+      "httpOnly": true,
+      "encrypt": true,
+      "prefix": "EGG_SESS:"
+    },
+    "i18n": {
+      "defaultLocale": "en_US",
+      "dir": "E:\\github\\uc\\learn\\egg-example\\config\\locales",
+      "queryField": "locale",
+      "cookieField": "locale",
+      "cookieMaxAge": "1y"
+    },
+    "watcher": {
+      "type": "development"
+    },
+    "multipart": {
+      "autoFields": false,
+      "defaultCharset": "utf8",
+      "fieldNameSize": 100,
+      "fieldSize": "100kb",
+      "fields": 10,
+      "fileSize": "10mb",
+      "files": 10,
+      "fileExtensions": [],
+      "whitelist": null
+    },
+    "security": {
+      "type": "default",
+      "defaultMiddleware": "csrf,ctoken,hsts,methodnoallow,noopen,nosniff,csp,xssProtection,xframe",
+      "csrf": {
+        "enable": true
+      },
+      "ctoken": {
+        "enable": true
+      },
+      "xframe": {
+        "enable": true,
+        "value": "SAMEORIGIN"
+      },
+      "hsts": {
+        "enable": true,
+        "maxAge": 31536000,
+        "includeSubdomains": false
+      },
+      "methodnoallow": {
+        "enable": true
+      },
+      "noopen": {
+        "enable": true
+      },
+      "nosniff": {
+        "enable": true
+      },
+      "xssProtection": {
+        "enable": true,
+        "value": "1; mode=block"
+      },
+      "csp": {
+        "enable": false,
+        "policy": {}
+      }
+    },
+    "helper": {
+      "shtml": {
+        "domainWhiteList": []
+      }
+    },
+    "development": {
+      "staticMiddleware": null,
+      "watchDirs": [],
+      "ignoreDirs": []
+    },
+    "static": {
+      "router": "/public/",
+      "dir": "E:\\github\\uc\\learn\\egg-example\\app\\public",
+      "maxAge": 0,
+      "buffer": false,
+      "dynamic": true
+    },
+    "logrotater": {
+      "filesRotateBySize": [],
+      "maxFileSize": 52428800,
+      "maxFiles": 10,
+      "rotateDuration": 60000
+    },
+    "view": {
+      "loadpath": "E:\\github\\uc\\learn\\egg-example\\app\\views",
+      "watch": true
+    },
+    "middleware": [
+      "robot"
+    ],
+    "robot": {
+      "ua": [
+        {}
+      ]
+    },
+    "coreMiddlewares": [
+      "meta",
+      "siteFile",
+      "notfound",
+      "bodyParser",
+      "overrideMethod"
+    ],
+    "appMiddlewares": [
+      "robot"
+    ],
+    "appMiddleware": [
+      "robot"
+    ]
+  },
+  "plugins": {
+    "onerror": {
+      "enable": true,
+      "package": "@ali/egg-onerror",
+      "name": "onerror",
+      "dep": [],
+      "env": [],
+      "path": "E:\\github\\uc\\learn\\egg-example\\node_modules\\.npminstall\\@ali\\egg\\2.2.0\\@ali\\egg\\node_modules\\@ali\\egg-onerror",
+      "version": "1.0.2"
+    },
+    "userservice": {
+      "enable": true,
+      "package": "@ali/egg-userservice",
+      "name": "userservice",
+      "dep": [],
+      "env": [],
+      "path": "E:\\github\\uc\\learn\\egg-example\\node_modules\\.npminstall\\@ali\\egg\\2.2.0\\@ali\\egg\\node_modules\\@ali\\egg-userservice",
+      "version": "1.0.1"
+    },
+    "userrole": {
+      "enable": true,
+      "package": "@ali/egg-userrole",
+      "name": "userrole",
+      "dep": [],
+      "env": [],
+      "path": "E:\\github\\uc\\learn\\egg-example\\node_modules\\.npminstall\\@ali\\egg\\2.2.0\\@ali\\egg\\node_modules\\@ali\\egg-userrole",
+      "version": "1.0.0"
+    },
+    "session": {
+      "enable": true,
+      "package": "@ali/egg-session",
+      "name": "session",
+      "dep": [],
+      "env": [],
+      "path": "E:\\github\\uc\\learn\\egg-example\\node_modules\\.npminstall\\@ali\\egg\\2.2.0\\@ali\\egg\\node_modules\\@ali\\egg-session",
+      "version": "1.0.1"
+    },
+    "i18n": {
+      "enable": true,
+      "package": "@ali/egg-i18n",
+      "name": "i18n",
+      "dep": [],
+      "env": [],
+      "path": "E:\\github\\uc\\learn\\egg-example\\node_modules\\.npminstall\\@ali\\egg\\2.2.0\\@ali\\egg\\node_modules\\@ali\\egg-i18n",
+      "version": "1.0.4"
+    },
+    "validate": {
+      "enable": true,
+      "package": "@ali/egg-validate",
+      "name": "validate",
+      "dep": [],
+      "env": [],
+      "path": "E:\\github\\uc\\learn\\egg-example\\node_modules\\.npminstall\\@ali\\egg\\2.2.0\\@ali\\egg\\node_modules\\@ali\\egg-validate",
+      "version": "1.0.0"
+    },
+    "watcher": {
+      "enable": true,
+      "package": "@ali/egg-watcher",
+      "name": "watcher",
+      "dep": [],
+      "env": [],
+      "path": "E:\\github\\uc\\learn\\egg-example\\node_modules\\.npminstall\\@ali\\egg\\2.2.0\\@ali\\egg\\node_modules\\@ali\\egg-watcher",
+      "version": "1.0.7"
+    },
+    "multipart": {
+      "enable": true,
+      "package": "@ali/egg-multipart",
+      "name": "multipart",
+      "dep": [],
+      "env": [],
+      "path": "E:\\github\\uc\\learn\\egg-example\\node_modules\\.npminstall\\@ali\\egg\\2.2.0\\@ali\\egg\\node_modules\\@ali\\egg-multipart",
+      "version": "2.0.0"
+    },
+    "security": {
+      "enable": true,
+      "package": "@ali/egg-security",
+      "name": "security",
+      "dep": [
+        "session"
+      ],
+      "env": [],
+      "path": "E:\\github\\uc\\learn\\egg-example\\node_modules\\.npminstall\\@ali\\egg\\2.2.0\\@ali\\egg\\node_modules\\@ali\\egg-security",
+      "version": "1.2.6"
+    },
+    "development": {
+      "enable": true,
+      "package": "@ali/egg-development",
+      "name": "development",
+      "dep": [
+        "watcher"
+      ],
+      "env": [
+        "local"
+      ],
+      "path": "E:\\github\\uc\\learn\\egg-example\\node_modules\\.npminstall\\@ali\\egg\\2.2.0\\@ali\\egg\\node_modules\\@ali\\egg-development",
+      "version": "1.2.0"
+    },
+    "static": {
+      "enable": true,
+      "package": "@ali/egg-static",
+      "name": "static",
+      "dep": [],
+      "env": [],
+      "path": "E:\\github\\uc\\learn\\egg-example\\node_modules\\.npminstall\\@ali\\egg\\2.2.0\\@ali\\egg\\node_modules\\@ali\\egg-static",
+      "version": "2.0.0"
+    },
+    "logrotater": {
+      "enable": true,
+      "package": "@ali/egg-logrotater",
+      "name": "logrotater",
+      "dep": [],
+      "env": [],
+      "path": "E:\\github\\uc\\learn\\egg-example\\node_modules\\.npminstall\\@ali\\egg\\2.2.0\\@ali\\egg\\node_modules\\@ali\\egg-logrotater",
+      "version": "1.1.2"
+    },
+    "view": {
+      "enable": true,
+      "package": "@ali/egg-view-nunjucks",
+      "name": "view",
+      "dep": [
+        "security",
+        "watcher"
+      ],
+      "env": [],
+      "path": "E:\\github\\uc\\learn\\egg-example\\node_modules\\@ali\\egg-view-nunjucks",
+      "version": "2.0.0"
+    }
+  }
+}
