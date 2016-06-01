@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>验证规则</title>
+</head>
+<body>
+
+<script type="text/javascript">
+'use strict';
+
+  /**
+    * 验证单个值，是否为空
+    * @param {Number|Object|Array|String} [value] 需要验证非空的值
+    * @return {Boolean}
+   */
+  function isEmpty(value){
+    const type = typeof value;
+    let isEmpty;
+    switch (type) {
+      case 'undefined':
+        isEmpty = true;
+        break;
+      case 'object':
+        if (Array.isArray(value)) {
+          isEmpty = value.length <= 0;
+        } else {
+          isEmpty = value === null;
+        }
+        break;
+      case 'string':
+        isEmpty = value.trim() === '';
+        break;
+      case 'number':
+        isEmpty = Number.isNaN(value);
+        break;
+      default:
+        isEmpty = false;
+    }
+    return isEmpty;
+  }
+  function isNotEmpty(value) {
+    return !isEmpty(value);
+  }
+
+  /**
+    * @param {Object} [params] 需要验证的数据源
+    * @param {Object} [validators] 验证数据源的那些字段
+    * @param {String} [errFormate] 错误的格式 $key 代表错误的key
+    * @returns {Promise}
+    *
+    * @example
+    *  valid({ text: '' }) --> fail
+    *  valid({ text: '123' }) --> done
+    *  valid({ text: '', age: 2 }, { age: 1 }) -> done，第二个参数，指定验证age
+    *  valid({ text: '' }, { age: 1 }) -> fail，没有必要的age
+    *  valid({ text: '' }, { text: { error: '错误', checker: function(value) { return true; }}}); -> done，因为checker返回了 true
+    *  valid({ text: 'xxx' }, { text: { error: '错误', checker: function(value) { return false; }}}); -> fail，因为checker返回了 false，而且返回的错误是: '错误'
+    *  valid({ text: '' }, '缺少参数$key') -> fail，错误是: '缺少参数text'
+   */
+  function valid(params, validators, errFormate){
+    if (typeof validators === 'string') {
+      errFormate = validators;
+      validators = null;
+    }
+
+    const hasValidators = !!validators;
+    validators = validators || {};
+    errFormate = errFormate || '不能空诶: "$key"';
+
+    // 验证函数
+    const promiseHandler = function handler(resolve, reject) {
+      const target = hasValidators ? validators : params;
+      const source = params;
+
+      for(const key in target) {
+        const sourceHasKey = source.hasOwnProperty(key);
+        const targetHasKey = target.hasOwnProperty(key);
+
+        if (targetHasKey) {
+          let isPass = true;
+          const validator = validators[key] || {};
+          const isPassFn = validator.checker || isNotEmpty;
+          const error = validator.error || errFormate;
+
+          if (sourceHasKey) {
+            const value = source[key];
+            isPass = isPassFn(value);
+          } else {
+            isPass = false;
+          }
+
+          if (!isPass) {
+            reject(error.replace(/\$key/g, key));
+          }
+          // end if/sourceHasKey
+        }
+        // end for
+      }
+      resolve(1);
+    };
+
+    return new Promise(promiseHandler);
+  }
+
+  var additions = {
+    text: {
+      error: '不能空诶..',
+      checker: function(val){
+        return true;
+      }
+    }
+  };
+  var errFormate = '"$key"不能为空';
+
+  valid({ text: '' }, additions).then(
+    function(data){
+      console.log('{text: ""} --> done');
+    },
+    function(error) {
+      console.log('产生了错误:', error);
+    }
+  );
+
+  valid({ list: [] }).then(
+    function(data){
+      console.log('list 全部验证成功');
+    },
+    function(error) {
+      console.log('list 产生了错误:', error);
+    }
+  );
+
+  valid({ text: '', age: 2 }, { age: 1 }).then(
+    function(data){
+      console.log('{ text: \'\', age: 2 } -> done');
+    },
+    function(error) {
+      console.log('产生了错误:', error);
+    }
+  );
+
+  valid({ text: '', age: 2 }, { text: 1, age: 1 }).then(
+    function(data){
+      console.log('全部验证成功');
+    },
+    function(error) {
+      console.log('{ text: \'\', age: 2 }, {text: 1, age: 1}, 产生了错误:', error);
+    }
+  );
+
+  valid({ text: '', age: 2 }, { text: 1, age: 1 }, '产生错误，是很严重的-$key').then(
+    function(data){
+      console.log('全部验证成功');
+    },
+    function(error) {
+      console.log('{ text: \'\', age: 2 }, {text: 1, age: 1}, 产生了错误:', error);
+    }
+  );
+
+  valid({ text: '' }, '缺少参数$key').then(
+    function(data){
+      console.log('全部验证成功');
+    },
+    function(error) {
+      console.log('{ text: \'\' }, 产生了错误:', error);
+    }
+  );
+
+</script>
+</body>
+</html>
