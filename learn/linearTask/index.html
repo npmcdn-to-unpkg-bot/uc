@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>线性任务</title>
+</head>
+<body>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script type="text/javascript">
+  // 因为懒，所以依赖jquery
+  function LinearTask() {
+    this.tasks = [];
+    // prev promise result
+    this.prevRes = [];
+  }
+  LinearTask.prototype = {
+    /**
+      * 添加一个任务
+      * @param {Function} [task] 一个返回 promise/a 的函数
+      * @param {All} [fail] 如果是函数，则执行后返回，否则直接返回
+      * @returns this
+     */
+    add: function(task, fail){
+      this.tasks.push({
+        promiseFn: task,
+        fail: fail
+      });
+      return this;
+    },
+    clear: function() {
+      this.tasks = [];
+      return this;
+    },
+    start: function(){
+      return this._runTask(this.tasks.slice(0));
+    },
+    _runTask: function(tasks) {
+      var self = this;
+      var resPromise = $.Deferred();
+      var task;
+
+      function promiseSuc() {
+        self.prevRes = [].slice.call(arguments, 0);
+        runTask();
+      }
+      function promiseErr(error) {
+        if (task.fail) {
+          var fail = task.fail;
+          if (typeof fail === 'function') {
+            error = fail.call(self, error);
+          } else {
+            error = fail;
+          }
+        }
+        resPromise.reject(error);
+      }
+      function runTask() {
+        task = tasks.shift();
+        if (task) {
+          var promise = task.promiseFn;
+          if (typeof promise === 'function') {
+            promise = promise.call(self);
+          }
+          if (promise.then) {
+            promise.then(promiseSuc, promiseErr);
+          } else {
+            throw 'task should be a promise/a object';
+          }
+        } else {
+          resPromise.resolve();
+        }
+      }
+
+      runTask();
+
+      return resPromise;
+    }
+  };
+
+  var linearTask = new LinearTask();
+
+  linearTask.add(function firstTask() {
+      console.log('第1个任务');
+
+      var def = $.Deferred();
+      setTimeout(function() {
+        def.resolve(1);
+      }, 1000);
+      return def;
+    }, '产生了错误1')
+    .add(function sendTask() {
+      console.log('第2个任务');
+      console.log("前一个def，给来的参数:", this.prevRes);
+
+      var def = $.Deferred();
+      setTimeout(function() {
+        def.resolve();
+        // def.reject('抛出错误2');
+      }, 1000);
+      return def;
+    });
+
+  linearTask.start().then(function() {
+      console.log('全部成功')
+    }, function(err) {
+      console.log('失败了:', err);
+    });
+</script>
+</body>
+</html>
