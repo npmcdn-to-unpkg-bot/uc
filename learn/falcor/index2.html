@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>falcor学习</title>
+</head>
+<body>
+
+<script src="https://netflix.github.io/falcor/build/falcor.browser.js"></script>
+<script>
+// var modal1 = new falcor.Model({
+//   cache: {
+//     user: {
+//       name: 'test1',
+//       address: '1600 Pennsy Street'
+//     }
+//   }
+// });
+// modal1.
+//   getValue('user.name').
+//   then(function(userName) {
+//     // getValue只能读取到单个属性
+//     console.log('getValue: ', userName);
+//   });
+
+
+// var model2 = new falcor.Model({
+//   cache: {
+//     todos: [
+//       { name: 'todo1', done: false }
+//     ]
+//   }
+// });
+// model2.
+//   getValue('todos[0].name').
+//   then(name => console.log(name));
+
+
+// var model3 = new falcor.Model({
+//   cache: {
+//     todos: [
+//       { name: 'todo1', done: false },
+//       { name: 'todo2', done: false }
+//     ]
+//   }
+// });
+// model3.
+//   get('todos[0].name', 'todos[1].name').
+//   then(data => {
+//     // 这里，会返回 todos: [0, 1]
+//     console.log(data);
+//   });
+
+var model4 = new falcor.Model({
+  cache: {
+    todos: [
+      { name: 'todo1', done: false },
+      { name: 'todo2', done: false }
+    ]
+  }
+});
+model4.
+  get('todos[0].name', 'todos[1].name').
+  subscribe(pathValue => console.log(JSON.stringify(pathValue)));
+</script>
+</body>
+</html>
