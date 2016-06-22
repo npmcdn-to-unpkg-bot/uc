@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>样式object-fit测试</title>
+  <style>
+    ul:after { content: ''; clear: both; display: table; }
+    li { list-style: none; float: left; width: 200px; height: 180px; background: red; margin: 20px; }
+    img { width: 100%; height: 100%; }
+    /* 默认 object-position 是 50% 50% */
+    .none { object-fit: none; }
+    /* 铺满容器 */
+    .contain { object-fit: contain; }
+    /* 长或宽，拉伸到对应的边缘，可能被切割掉一部分 */
+    .cover { object-fit: cover; }
+    /* 先尝试 none，如果 none 不能满足，则使用 cover */
+    .scale-down { object-fit: scale-down; }
+  </style>
+</head>
+<body>
+
+  <ul>
+    <li>
+      <img class="none" src="http://linfenpan.github.io/assert/personal.png" />
+    </li>
+    <li>
+      <img class="contain" src="http://linfenpan.github.io/assert/personal.png" />
+    </li>
+    <li>
+      <img class="cover" src="http://linfenpan.github.io/assert/personal.png" />
+    </li>
+    <li>
+      <img class="scale-down" src="http://linfenpan.github.io/assert/personal.png" />
+    </li>
+  </ul>
+
+</body>
+</html>
