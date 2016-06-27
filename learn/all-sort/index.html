@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>数组所有排列</title>
+</head>
+<body>
+  <div id="content"></div>
+
+  <script>
+  var list = [1, 2, 3, 4];
+  var target = [];
+
+  list.forEach(function(item, index) {
+    rank(index, [item]);
+  });
+
+  function rank(index, parentList) {
+    target.push(parentList);
+    for (var i = index + 1, max = list.length; i < max; i++) {
+      var nowList = parentList.slice(0);
+      nowList.push(list[i]);
+      rank(i, nowList);
+    }
+  }
+
+// 下面的排序，是有强迫症啊...
+  function shouldExchange(prev, next) {
+    if (prev.length !== next.length) {
+      return prev.length > next.length;
+    }
+    for (var i = 0, max = prev.length; i < max; i++) {
+      if (prev[i] > next[i]) {
+        return true;
+      } else if (prev[i] < next[i]) {
+        return false;
+      }
+    }
+    return false;
+  }
+
+  target.sort(function(a, b){
+    return shouldExchange(a, b) ? 1 : -1;
+  });
+
+  document.querySelector('#content').innerHTML = JSON.stringify(target, null, 2);
+  </script>
+</body>
+</html>

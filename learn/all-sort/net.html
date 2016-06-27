@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+<script>
+var strEditions = [1, 2, 3, 4]
+
+var strOptions = [];
+
+function GetAllOptions()
+{
+    for (var i=0; i<strEditions.length; i++)
+    {
+        strOptions = strOptions.concat(GetSubOptions(i, strEditions[i]));
+    }
+    setTimeout(function(){
+      document.getElementById('content').innerHTML = JSON.stringify(strOptions, null, 2);
+    }, 1);
+}
+
+function GetSubOptions(startFrom, ParentValue)
+{
+    var strTmpOptions = new Array();
+    strTmpOptions.push(ParentValue);
+    for(var j=startFrom+1; j<strEditions.length; j++)
+    {
+        if(startFrom+1 < strEditions.length)
+        {
+            strTmpOptions = strTmpOptions.concat(GetSubOptions(j, ParentValue + "_" + strEditions[j]));
+        }
+    }
+    return strTmpOptions;
+}
+GetAllOptions();
+</script>
+</head>
+<body>
+  <div id="content"></div>
+</body>
+</html>
