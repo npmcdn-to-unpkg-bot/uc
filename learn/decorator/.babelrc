@@ -1,4 +1,9 @@
 {
-  "presets": ["es2015"],
-  "plugins": ["syntax-decorators", "transform-es2015-modules-amd"]
+  "presets": ["es2015", "stage-0"],
+  "plugins": [
+    "syntax-flow",
+    "transform-decorators-legacy",
+    "transform-flow-strip-types",
+    "transform-es2015-modules-amd"
+  ]
 }

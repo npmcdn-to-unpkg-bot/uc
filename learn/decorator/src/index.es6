@@ -1,4 +1,11 @@
 'use strict';
-import { decorate } from 'lib/core-decorators';
+import { readonly, decorate } from './lib/core-decorators/core-decorators';
 
-console.log(67);
+
+class Meal {
+  @readonly
+  entree = 'steak';
+}
+
+const dinner = new Meal();
+dinner.entree = 'salmon';
