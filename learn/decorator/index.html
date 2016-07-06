@@ -7,6 +7,27 @@
 <body>
 transform-decorators-legacy
 进行decorator的转换
+<br/><br/>
+
+如果是 @test，那么对应的 function test() {},<br/>
+收到的参数，将会是 test(target, key, descriptor)<br/><br/>
+
+如果是 @test(1)，那么:<br/>
+<code>
+<pre>
+// options === 1
+function test(optoins) {
+  return function(target, key, descriptor) {
+
+  }
+}
+</pre>
+</code>
+<br/><br/>
+
+如果 @test，声明的对象是一个类，<br/>
+收到的参数，将会是: test(class)<br/><br/>
+
 <script src="http://requirejs.org/docs/release/2.1.11/minified/require.js"></script>
 <script>
   require(['./dist/index']);
