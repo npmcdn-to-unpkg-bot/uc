@@ -1,0 +1,30 @@
+const formdata = new FormData();
+formdata.append('name', name);
+formdata.append('img', base64);
+
+if (this.uploadHandler === $.noop) {
+  this.uploadHandler = function upload(ctx, data) {
+	if (data.code == 0) {
+	  ctx.value = data.data;
+	} else {
+	  alert(data.error);
+	}
+  };
+}
+
+this.uploading = true;
+$.ajax({
+  method: 'POST',
+  url: this.uploadUrl + '?ctoken=' + cookies.get('ctoken'),
+  data: formdata,
+  contentType: false,
+  processData: false
+}).done(data => {
+  this.uploadHandler(this, data);
+  this.onUploadSuccess(this);
+}).fail(() => {
+  alert('request error');
+  this.onUploadError(this);
+}).always(() => {
+  this.uploading = false;
+});
