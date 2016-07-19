@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>图片裁剪</title>
+  <link href="cropper.min.css" rel="stylesheet" />
+  <style>
+    * { margin: 0; padding: 0; }
+    img { max-width: 100%; }
+  </style>
+</head>
+<body>
+  <input type="file" id="upload">
+  <div style="width:500px; height: 300px;">
+    <img id="image" src="./pic.jpg" />
+  </div>
+
+  <script src="jquery.min.js"></script>
+  <script src="cropper.min.js"></script>
+  <script>
+  var $image = $('#image');
+  var $upload = $('#upload');
+
+  $upload.on('change', function(){
+    var files = this.files;
+    if (files.length > 0) {
+      var file = files[0];
+      // 转化为一个临时的对象
+      var url = URL.createObjectURL(file);
+      $image.cropper('replace', url);
+    }
+  });
+
+  $image.cropper({
+    aspectRatio: 1,
+    responsive: true, // 响应窗口的变化
+  });
+
+  // var canvas = $image.cropper('getCroppedCanvas', {
+  //   width: 100, height: 100
+  // });
+  // canvas.toDataURL();
+  </script>
+</body>
+</html>
